@@ -49,7 +49,7 @@ class Application {
     let messageOut = "";
 
     for (let i = 0; i < message.length; i++) {
-      let y = this._table[0].indexOf(message.charAt(i)) % this._alphabet.length;
+      let y = this._table[0].indexOf(message.charAt(i));
       let x = this._table[0].indexOf(key.charAt(i));
 
       messageOut += this._table[y][x];
@@ -78,13 +78,7 @@ class Application {
 
     for (let i = 0; i < message.length; i++) {
       let y = this._table[0].slice(1).indexOf(key.charAt(i));
-      let x = this._table[y].indexOf(message.charAt(i));
-
-      if (x - 1 <= 0) {
-        x = this._alphabet.length;
-      } else {
-        x -= 1;
-      }
+      let x = this._table[y].indexOf(message.charAt(i)) - 1;
 
       messageOut += this._table[0][x];
     }
