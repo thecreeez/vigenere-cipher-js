@@ -33,11 +33,14 @@ class Application {
    * @param {String} message 
    * @param {String} key 
    */
-  encrypt(message, key = false) {
-    message = this._removeNoAlphabetSymbols(message);
+  encrypt(message, key = "") {
+    message = this.removeNoAlphabetSymbols(message);
+    key = this.removeNoAlphabetSymbols(key);
 
     if (!key || key.length == 0) {
       key = this._generateKey();
+    } else {
+      key = this.removeNoAlphabetSymbols(key);
     }
 
     key = this._formKey(message.length, key);
@@ -49,7 +52,7 @@ class Application {
     let messageOut = "";
 
     for (let i = 0; i < message.length; i++) {
-      let y = this._table[0].indexOf(message.charAt(i));
+      let y = this._table[0].indexOf(message.charAt(i)) % this._alphabet.length;
       let x = this._table[0].indexOf(key.charAt(i));
 
       messageOut += this._table[y][x];
@@ -64,7 +67,8 @@ class Application {
       return null;
     }
 
-    message = this._removeNoAlphabetSymbols(message);
+    message = this.removeNoAlphabetSymbols(message);
+    key = this.removeNoAlphabetSymbols(key);
 
     if (key.length < message.length) {
       key = this._formKey(message.length, key);
@@ -73,12 +77,24 @@ class Application {
     return { message: this._decryptMessage(message, key), key };
   }
 
+  getAlphabet() {
+    return this._alphabet;
+  }
+
   _decryptMessage(message, key) {
     let messageOut = "";
 
     for (let i = 0; i < message.length; i++) {
       let y = this._table[0].slice(1).indexOf(key.charAt(i));
-      let x = this._table[y].indexOf(message.charAt(i)) - 1;
+
+      console.log(key)
+      let x = (this._table[y].indexOf(message.charAt(i)) + this._alphabet.length) % this._alphabet.length;
+
+      if (x - 1 <= 0) {
+        x = this._alphabet.length;
+      } else {
+        x -= 1;
+      }
 
       messageOut += this._table[0][x];
     }
@@ -104,7 +120,7 @@ class Application {
     return formedKey;
   }
 
-  _removeNoAlphabetSymbols(message) {
+  removeNoAlphabetSymbols(message) {
     let outMessage = "";
 
     message.split("").forEach((symbol) => {

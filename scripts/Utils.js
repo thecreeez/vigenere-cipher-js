@@ -44,4 +44,10 @@ class Utils {
       document.getElementById("applicationInfo").innerHTML = data;
     }
   }
+
+  static unitTest(application, message, key) {
+    let bSuccess = application.removeNoAlphabetSymbols(message) == application.decrypt(application.encrypt(message, key).message, key).message;
+
+    console.log(`Test: message: ${message}. key: ${key}. Success: ${bSuccess}`, application.getAlphabet())
+  }
 }

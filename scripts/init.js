@@ -24,3 +24,8 @@ ENCRYPT_BUTTON.addEventListener('click', (ev) => {
   KEY_INPUT.value = data.key;
   DECRYPT_INPUT.value = data.message;
 })
+
+Utils.unitTest(App, "120писемвперёд", "пароль");
+Utils.unitTest(App, "testmessageночучутьрусского", "стрекоза");
+Utils.unitTest(App, "testmessageночучутьрусского", "5крыдбев");
+Utils.unitTest(App, "я", "а");
