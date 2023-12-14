@@ -87,7 +87,6 @@ class Application {
     for (let i = 0; i < message.length; i++) {
       let y = this._table[0].slice(1).indexOf(key.charAt(i));
 
-      console.log(key)
       let x = (this._table[y].indexOf(message.charAt(i)) + this._alphabet.length) % this._alphabet.length;
 
       if (x - 1 <= 0) {
