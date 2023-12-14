@@ -1,0 +1,35 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 100px 1fr 50px 1fr 100px;
+}
+
+h3 {
+  text-align: center;
+}
+
+.alert {
+  margin-top: 30px;
+  margin-left: 100px;
+  margin-right: 100px;
+  min-height: 150px;
+}
+
+.decrypt-form {
+  grid-column: 4;
+}
+
+.encrypt-form {
+  grid-column: 2;
+}
+
+.input-group {
+  display: flex;
+}
+
+.key-form {
+  margin-top: 5px;
+  grid-column-start: 2;
+  grid-column-end: 5;
+
+  min-width: 100%;
+}
